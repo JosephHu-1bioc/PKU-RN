@@ -1,0 +1,9 @@
+# 本地字幕服务的最小依赖（跨 Windows / macOS / Linux）
+# 模型不打包：首次转写按需下载到 whisper_service/.cache，默认 CPU base / GPU small。
+# 可选 GPU 加速不在此文件里；见 README 的“可选 GPU”一节。
+faster-whisper==1.2.1
+av==18.1.0
+zhconv>=1.4
+pymupdf>=1.24
+python-docx>=1.1
+python-pptx>=1.0

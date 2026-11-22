@@ -1,0 +1,92 @@
+{
+  "manifest_version": 3,
+  "name": "课堂实录回放笔记",
+  "version": "0.9.4",
+  "description": "为北大教学网课堂实录提供观看进度、时间戳笔记、音频转写字幕、按音频分章节、PPT/PDF/Word 资料解析，以及侧栏 AI 讲解。",
+  "minimum_chrome_version": "111",
+  "permissions": [
+    "storage",
+    "cookies",
+    "management"
+  ],
+  "host_permissions": [
+    "https://course.pku.edu.cn/*",
+    "https://onlineroomse.pku.edu.cn/*",
+    "https://resourcese.pku.edu.cn/*",
+    "https://api.deepseek.com/*",
+    "https://api.moonshot.cn/*",
+    "https://dashscope.aliyuncs.com/*",
+    "https://ark.cn-beijing.volces.com/*",
+    "https://open.bigmodel.cn/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "background": {
+    "service_worker": "src/background/ai.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://course.pku.edu.cn/webapps/bb-streammedia-hqy-BBLEARN/videoList.action*"
+      ],
+      "js": [
+        "src/common/time.js",
+        "src/common/token.js",
+        "src/common/storage.js",
+        "src/list/list.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://onlineroomse.pku.edu.cn/player*"
+      ],
+      "js": [
+        "src/player/download-probe.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://onlineroomse.pku.edu.cn/player*"
+      ],
+      "js": [
+        "src/player/probe.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://onlineroomse.pku.edu.cn/player*"
+      ],
+      "js": [
+        "src/common/time.js",
+        "src/common/storage.js",
+        "src/common/ai-config.js",
+        "src/common/pptx.js",
+        "src/common/srt.js",
+        "src/player/ai-settings.js",
+        "src/player/capture.js",
+        "src/player/ppt-store.js",
+        "src/player/handout-store.js",
+        "src/player/transcript-store.js",
+        "src/player/panel.css.js",
+        "src/player/adapter.js",
+        "src/player/panel.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAteqBwQvQsDr20a4nOsWIqvYOS0XK9e+ouwwwAE+rpulZHjt6cRxKgON6nemQDUKGOGOeXR1X2woDzhVmSl0DGYvqoBtuXFAuxI3gK905sbb4Z7LCllUQ4mowuMUzyNch4Uw0JIDz8TQkX6j2N5zZ9a7LC+LkpM3oqoBIWsmGJjO6LwJHVJSxHLc5g2z7hnhAG+Y/5Brt0pzxQuvanUD+j7mFQz+cbQDz33cdiFmlQK/0AsvZv40VV1GkbD3Lk1sshyD55Z2dhE7DdSHqNfDFXDUleSbJLJJNk2O4eoNbwY/t7CRmGblr4cUFWz3GfIFK6TYKK74/23f3fWIKYlTmlQIDAQAB"
+}

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# 模型缓存 / 转写产物
+service/.cache/
+*.srt
+*.vtt
+*.ass
+
+# 本地音视频（保留占位说明文件与 README）
+media/*
+!media/把音视频放这里.txt
+
+# 生成的讲义 / 导出
+*.pdf
+!docs/**/*.pdf
+dist/
+build/
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 便携包 / 安装包：仓库只放源码，二进制请走 Releases
+runtime/
+*.zip
+*.exe
+*.app/
